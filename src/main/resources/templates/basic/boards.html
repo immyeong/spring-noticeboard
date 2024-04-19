@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        } </style>
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>게시글 목록</h2> </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    th:onclick="|location.href='@{/basic/boards/add}'|"
+                    onclick="location.href='addForm.html'" type="button">게시글 등록
+            </button>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>타이틀</th>
+                <th>작성자</th>
+                <th>Review</th>
+                <th>조회수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="board : ${boards}">
+                <td><a href="board.html" th:href="@{/basic/boards/{boardId}(boardId=${board.id})}" th:text="${board.id}">게시판id</a></td>
+                <td><a href="board.html" th:href="@{/basic/boards/{boardId}(boardId=${board.id})}" th:text="${board.title}">타이틀</a></td>
+                <td th:text="${board.member != null ? board.member.username : ''}">작성자</td>
+                <td><a href="board.html" th:href="@{/basic/boards/{boardId}/reviews(boardId=${board.id})}" th:text="${board.reviewCount}">count</a></td>
+                <td th:text="${board.reviewCount}">10</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

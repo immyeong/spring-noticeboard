@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        } </style>
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>리뷰 목록</h2> </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    th:onclick="|location.href='@{/basic/boards/{boardId}/reviews/addReview(boardId=${board.id})}'|"
+                    onclick="location.href='addReviewForm.html'" type="button">리뷰 등록
+            </button>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>작성자</th>
+                <th>내용</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="review : ${reviews}">
+                <td><a th:href="@{/basic/boards/{boardId}/reviews/{reviewId}/edit(boardId=${board.id}, reviewId=${review.id})}" th:text="${review.id}">리뷰id</a></td>
+                <td th:text="${review.member != null ? review.member.username : ''}">작성자</td>
+                <td th:text="${review.content}">내용</td>
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
