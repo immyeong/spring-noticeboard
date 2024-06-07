@@ -3,6 +3,7 @@ package com.example.noticeboard.web.basic;
 import com.example.noticeboard.domain.*;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/basic/boards")
 public class BoardController {
@@ -27,6 +29,7 @@ public class BoardController {
 
     @GetMapping
     public String boards(Model model){
+        log.info("정상 연결되었습니다.");
         List<Board> boards = boardRepository.findAll();
         model.addAttribute("boards", boards);
         return "basic/boards";
